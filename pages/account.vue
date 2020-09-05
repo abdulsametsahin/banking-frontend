@@ -1,7 +1,7 @@
 <template>
   <div id="account">
     <div v-if="account">
-      <Header></Header>
+      <Header />
 
       <div class="container">
         <div class="d-flex justify-content-center w-100 mt-5">
@@ -14,11 +14,10 @@
         </div>
       </div>
     </div>
-
     <div class="container">
       <div class="d-flex justify-content-center w-100 mt-5">
         <div class="col-md-12">
-          <TransactionsTable :transactions="transactions"></TransactionsTable>
+          <TransactionsTable :transactions="transactions" />
         </div>
       </div>
     </div>
@@ -51,13 +50,13 @@ export default {
     };
   },
   computed: {
-    account() {
-      return this.$store.state.auth.account;
+    account: function () {
+      return this.$store.state.account;
     },
   },
   created() {
     if (localStorage.getItem("account")) {
-      this.$store.commit("auth/login", JSON.parse(localStorage.getItem("account")));
+      this.$store.commit("login", JSON.parse(localStorage.getItem("account")));
     }else {
       this.$router.push({path: "/"});
     }
@@ -93,9 +92,9 @@ export default {
     },
     updateAccount() {
       getAccount(this.account.id).then(response => {
-        this.$store.commit('auth/login', response.data.data.account);
+        this.$store.commit('login', response.data.data.account);
       })
-    }
+    },
   },
 };
 </script>

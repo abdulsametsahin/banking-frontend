@@ -44,7 +44,7 @@ export default {
   name: "TransactionForm",
   computed: {
     account() {
-      return this.$store.state.auth.account;
+      return this.$store.state.account;
     }
   },
   data() {

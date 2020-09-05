@@ -37,7 +37,7 @@ export default {
     login() {
       getAccount(this.account_id)
           .then(res => {
-            this.$store.commit("auth/login", res.data.data.account);
+            this.$store.commit("login", res.data.data.account);
             this.$router.push({path: "/account"});
           })
           .catch(() => {

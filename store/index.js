@@ -1,5 +1,5 @@
 export const state = () => {
-  account: null
+  account: {}
 }
 
 export const mutations = {
@@ -11,4 +11,10 @@ export const mutations = {
     state.account = null;
     localStorage.removeItem('account');
   },
+}
+
+export const getters = {
+  getAccount(state) {
+    return state.account;
+  }
 }
