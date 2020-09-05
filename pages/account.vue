@@ -1,7 +1,7 @@
 <template>
   <div id="account">
     <div v-if="account">
-      <Header />
+      <Header/>
 
       <div class="container">
         <div class="d-flex justify-content-center w-100 mt-5">
@@ -17,7 +17,7 @@
     <div class="container">
       <div class="d-flex justify-content-center w-100 mt-5">
         <div class="col-md-12">
-          <TransactionsTable :transactions="transactions" />
+          <TransactionsTable :transactions="transactions"/>
         </div>
       </div>
     </div>
@@ -32,6 +32,7 @@ import TransactionsTable from "~/components/TransactionsTable";
 
 export default {
   components: {TransactionsTable, TransactionForm, Header},
+  middleware: ["auth"],
   head() {
     return {
       title: "My Account"
@@ -54,14 +55,8 @@ export default {
       return this.$store.state.account;
     },
   },
-  created() {
-    if (localStorage.getItem("account")) {
-      this.$store.commit("login", JSON.parse(localStorage.getItem("account")));
-    }else {
-      this.$router.push({path: "/"});
-    }
-
-    this.getTransactions();
+  mounted() {
+      this.getTransactions();
   },
   methods: {
     transactionIsSuccessful() {
@@ -92,7 +87,7 @@ export default {
     },
     updateAccount() {
       getAccount(this.account.id).then(response => {
-        this.$store.commit('login', response.data.data.account);
+        this.$store.commit('updateBalance', response.data.data.account.balance);
       })
     },
   },
