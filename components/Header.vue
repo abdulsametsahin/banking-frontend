@@ -2,7 +2,7 @@
   <nav class="navbar navbar-light bg-light">
     <div class="container">
       <div class="d-flex w-100 justify-content-between alin-center">
-        <h4>{{ account.name }} ({{ account["balance"] }})</h4>
+        <h4>{{ account.name }} ({{ account.balance }})</h4>
         <div>
           <button class="btn btn-danger" @click="logout">Logout</button>
         </div>
@@ -23,7 +23,7 @@ export default {
   methods: {
     logout(event) {
       event.preventDefault();
-      this.$store.commit("auth/logout");
+      this.$store.commit("logout");
       this.$router.push({path: "/"});
     },
   },
