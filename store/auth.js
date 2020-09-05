@@ -10,5 +10,5 @@ export const mutations = {
   logout(state) {
     state.account = null;
     localStorage.removeItem('account');
-  }
+  },
 }
