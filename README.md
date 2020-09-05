@@ -1,5 +1,7 @@
 # frontend
 
+** The backend should run on port 8000 or edit the port in nuxt.config.js file 
+
 ## Build Setup
 
 ```bash
