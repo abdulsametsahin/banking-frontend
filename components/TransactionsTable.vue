@@ -9,7 +9,7 @@
           <th>To</th>
           <th>
             Amount
-            <button class="btn btn-sm " @click="toggleAmountSorting">
+            <button class="btn btn-sm btn-warning" @click="toggleAmountSorting">
               <Component :is="sortIconDefiner"></Component>
             </button>
           </th>
