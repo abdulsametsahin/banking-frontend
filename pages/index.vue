@@ -7,7 +7,7 @@
           <div class="card-body">
             <div class="form-group">
               <label for="account_id">Account ID:</label>
-              <input type="number" class="form-control" v-model="account_id" />
+              <input type="number" id="account_id" class="form-control" v-model="account_id"/>
             </div>
 
             <button class="btn btn-info" @click="login">🙋🏼‍♂️Login</button>
@@ -19,9 +19,14 @@
 </template>
 
 <script>
-import axios from "~/plugins/axios";
+import {getAccount} from "~/services/account";
 
 export default {
+  head() {
+    return {
+      title: "Login to your account"
+    }
+  },
   data() {
     return {
       is_loading: false,
@@ -29,21 +34,20 @@ export default {
     };
   },
   methods: {
-    login(event) {
-      axios
-        .get("accounts/" + this.account_id)
-        .then((res) => {
-          this.$store.commit("auth/login", res.data.data.account);
-          this.$router.push({ path: "/account" });
-        })
-        .catch((err) => {
-          this.$bvToast.toast("User not found!", {
-            title: "Warning",
-            variant: "warning",
-            autoHideDelay: 3000,
-            appendToast: false,
-          });
-        });
+    login() {
+      getAccount(this.account_id)
+          .then(res => {
+            this.$store.commit("auth/login", res.data.data.account);
+            this.$router.push({path: "/account"});
+          })
+          .catch(() => {
+            this.$bvToast.toast("User not found!", {
+              title: "Warning",
+              variant: "warning",
+              autoHideDelay: 3000,
+              appendToast: false,
+            });
+          })
     },
   },
 };
